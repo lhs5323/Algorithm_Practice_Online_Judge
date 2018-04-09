@@ -1,27 +1,27 @@
 import java.util.*;
-class pinary {
+import java.math.BigInteger;
+
+public class pinary {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    pinary count_pinary = new pinary();
     int n = sc.nextInt();
-
-    System.out.println(count_pinary.fibo(n));
-
-  }
-  public double fibo(int n) {
-    /*if ( n == 0 ) {
-      return 0;
-    } else if (n == 1) {
-      return 1;
-    } else {
-      return (fibo(n - 1) + fibo(n - 2));
-    }*/
-    double prev = 0d, next = 1d, result = 0d;
-    for (int i = 0; i < n; i++) {
-      result = prev + next;
-      prev = next;
-      next = result;
+    BigInteger[] pinary_arr = new BigInteger[n+1];
+    if(n == 0) {
+      pinary_arr[0] = BigInteger.ZERO;
     }
-    return result;
+    if(n == 1){
+      pinary_arr[1] = BigInteger.ONE;
+    }
+    if(n == 2){
+      pinary_arr[2] = BigInteger.ONE;
+    }
+    for(int i = 3; i < n+1; i++){
+      pinary_arr[0] = BigInteger.ZERO;
+      pinary_arr[1] = BigInteger.ONE;
+      pinary_arr[2] = BigInteger.ONE;
+      pinary_arr[i] = pinary_arr[i - 1].add(pinary_arr[i -2]);
+    }
+    System.out.println(pinary_arr[n]);
+    sc.close();
   }
 }
